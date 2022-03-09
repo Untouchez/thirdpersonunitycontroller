@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraRaycast : MonoBehaviour
 {
+    public float speed;
     Camera mainCamera;
     // Start is called before the first frame update
     void Start()
@@ -16,7 +17,7 @@ public class CameraRaycast : MonoBehaviour
     {
         if(Physics.Raycast(mainCamera.transform.position,mainCamera.transform.forward, out RaycastHit hit,100f))
         {
-            transform.position = hit.point;
+            transform.position = Vector3.Lerp(transform.position,hit.point, speed*Time.deltaTime);
         }
     }
 }

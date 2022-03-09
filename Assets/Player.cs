@@ -24,17 +24,20 @@ public class Player : MonoBehaviour
         mainCamera = Camera.main;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         HandleInputs();
         anim.SetFloat("Vertical", calculatedInput.z);
         anim.SetFloat("Horizontal", calculatedInput.x);
-
+            
         rigAnim.SetBool("gunup", rawInput.magnitude == 0);
-        Vector3 moveVector = (calculatedInput * speed) * Time.deltaTime;
-        moveVector.y = 0;
-        rb.velocity = mainCamera.transform.TransformDirection(moveVector);
+        Vector3 moveVector = (calculatedInput * speed);
+        rb.velocity = transform.TransformDirection(moveVector);
 
+    }
+
+    void Update()
+    {
         HandleRotation();
     }
 
